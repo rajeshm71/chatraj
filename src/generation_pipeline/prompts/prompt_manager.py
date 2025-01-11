@@ -32,7 +32,7 @@ class PromptManager:
             ]
         )
 
-    def get_qa_prompt(self, context_placeholder="{context}", chat_history_placeholder="chat_history", user_input="{input}"):
+    def get_qa_prompt(self, context="{context}", chat_history_placeholder="chat_history", user_input="{input}"):
         """
         Generate the QA prompt.
 
@@ -44,8 +44,8 @@ class PromptManager:
         return ChatPromptTemplate.from_messages(
             [
                 ("system", "You are a helpful AI assistant. Use the following context to answer the user's question."),
-                ("system", f"Context: {context_placeholder}"),
-                MessagesPlaceholder(variable_name=chat_history_placeholder),
+                ("system", context),
+                MessagesPlaceholder(variable_name="chat_history"),
                 ("human", user_input),
             ]
         )
